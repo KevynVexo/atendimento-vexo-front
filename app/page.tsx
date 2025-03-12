@@ -5,7 +5,7 @@ import Footer from "./components/footer/Footer";
 const App = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <Header title="Inicio"/>
       <main className="flex-grow flex items-center justify-center bg-gray-100">
       </main>
       <Footer />

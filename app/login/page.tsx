@@ -1,30 +1,55 @@
 import React from "react";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
+import "../styles/login.css";
+import "../styles/global.css";
 
 const Login = () => {
   return (
-      <div className="flex flex-col min-h-screen">
-        <Header />
-        <main className="flex-grow flex items-center justify-center bg-gray-100">
-          <div className="bg-white p-6 rounded-lg shadow-md w-96">
-          <h2 className="text-xl font-bold mb-4">Login</h2>
-          <form>
+    <div className="flex flex-col min-h-screen bg-white">
+      <Header title="Login" />
+      <main className="flex-grow flex items-center justify-center">
+        <div className="flex flex-wrap justify-between items-center max-w-4xl w-full p-8">
+          {/* Formulário de Login */}
+          <div className="bg-white p-8 rounded-lg shadow-md w-96 flex-form-login">
+            <form>
               <div className="mb-4">
-                <label className="block text-gray-700">Email</label>
-                <input type="email" className="w-full p-2 border rounded" placeholder="Digite seu email" />
+                <label className="block text-gray-700 text-sm font-medium">Email</label>
+                <input 
+                  type="email" 
+                  className="campo-formulario campo-login-senha"
+                />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700">Senha</label>
-                <input type="password" className="w-full p-2 border rounded" placeholder="Digite sua senha" />
+                <label className="block text-gray-700 text-sm font-medium">Senha</label>
+                <input 
+                  type="password" 
+                  className="campo-formulario campo-login-senha"
+                />
               </div>
-              <button type="submit" className="w-full bg-purple-600 text-white p-2 rounded hover:bg-purple-700">Entrar</button>
+              <div>
+                <a href="#" className="text-purple-800 text-sm block mb-4">Esqueci minha senha</a>
+                <button 
+                  type="submit" 
+                  className="w-full bg-purple-800 text-white p-3 rounded-lg text-lg font-semibold hover:bg-purple-900 transition duration-300">
+                  Entrar
+                </button>
+              </div>
             </form>
+            <div>
+              <a href="#" className="block text-center mt-4 text-purple-800 font-medium">Criar conta</a>
+            </div>
           </div>
-        </main>
-        <Footer />
-      </div>
-    );
+
+          {/* Ilustração */}
+          <div className="hidden md:block">
+            <img src="images/image-door.webp" alt="Ilustração" className="max-w-xs"/>
+          </div>
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
 };
 
 export default Login;
