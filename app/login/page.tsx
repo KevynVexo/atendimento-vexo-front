@@ -4,6 +4,7 @@ import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import "../styles/login.css";
 import "../styles/global.css";
+import UserService from "../components/services/user.service";
 
 const Login = () => {
   // Estados para armazenar email e senha
@@ -12,31 +13,7 @@ const Login = () => {
 
   // Função de login
   async function authenticatorLogin() {
-    try {
-      const response = await fetch("http://localhost:3000/user/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",  // Certifique-se de que isso está aqui se for necessário
-        },
-        body: JSON.stringify({ login: email, password }),
-        mode: 'cors',  // Configuração para indicar que a requisição é CORS
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Erro ao fazer login");
-      }
-
-      console.log("Login bem-sucedido:", data);
-      alert("Login realizado com sucesso!");
-      
-      // Aqui você pode redirecionar o usuário para outra página, se necessário
-      // window.location.href = "/dashboard";
-
-    } catch (error) {
-      console.error("Erro:", error);
-    }
+    await UserService.login(email,password);
   }
 
   return (
