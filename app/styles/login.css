@@ -83,6 +83,7 @@
   {
     display:grid;
     grid-template-columns: 100%;
+    margin-left: 20px;
   }
 
   .flex-estrutura-divisao {

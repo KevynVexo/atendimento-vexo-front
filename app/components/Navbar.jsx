@@ -1,38 +1,63 @@
-"use client"
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import "../styles/navbar.css";
-import { useState } from "react";
-import { Menu, X } from "lucide-react"; // Ícones do Lucide React
-
-export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
+function OffcanvasExample() {
   return (
-    <nav className="relative">
-      {/* Botão do Menu (Hambúrguer ou X) */}
-      <button
-        onClick={() => setMenuOpen(!menuOpen)}
-        className="fixed top-4 right-4 z-50 p-2 bg-white rounded-md shadow-md itemNav"
-      >
-        {menuOpen ? <X size={28} /> : <Menu size={28} />}
-      </button>
+    <Navbar expand={false} className="bg-body-tertiary-mod mb-3">
+      <Container fluid>
+        <Navbar.Brand href="#"></Navbar.Brand>
+        <Navbar.Toggle aria-controls="offcanvasNavbar" />
+        <Navbar.Offcanvas
+          id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel"
+          placement="end"
+        >
+          <Offcanvas.Header closeButton style={{ backgroundColor: "#550C55" }}>
+            <style>{`
+              .btn-close {
+                filter: invert(1);
+                border: 2px solid white;
+              }
+            `}</style>
+            <Offcanvas.Title id="offcanvasNavbarLabel">
+            <img
+              alt="Vexo Logo"
+              loading="lazy"
+              width={152}
+              height={48}
+              decoding="async"
+              data-nimg="1"
+              className="h-9 w-[121px]"
+              srcSet="
+                https://vexo.cdn.prismic.io/vexo/ZgGCx8cYqOFdyEDR_Logo.svg?auto=compress%2Cformat&fit=max&w=256 1x, 
+                https://vexo.cdn.prismic.io/vexo/ZgGCx8cYqOFdyEDR_Logo.svg?auto=compress%2Cformat&fit=max&w=384 2x
+              "
+              src="https://vexo.cdn.prismic.io/vexo/ZgGCx8cYqOFdyEDR_Logo.svg?auto=compress%2Cformat&fit=max&w=384"
+              style={{ color: "transparent" }}
+            />
 
-      {/* Menu Dropdown (Aparece e desaparece no clique) */}
-      {menuOpen && (
-        <div className="fixed top-0 right-0 w-64 h-full bg-[#550C55] text-white shadow-lg flex flex-col items-start p-6 gap-4 transition-transform itemNav">
-          <ul className="w-full">
-            <li className="py-2 border-b border-white">
-              <a href="/" className="block w-full hover:underline">Minha Vexo</a>
-            </li>
-            <li className="py-2 border-b border-white">
-              <a href="/contratos" className="block w-full hover:underline">Meus contratos</a>
-            </li>
-            <li className="py-2">
-              <a href="/dados" className="block w-full hover:underline">Dados cadastrais</a>
-            </li>
-          </ul>
-        </div>
-      )}
-    </nav>
+            </Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body style={{ backgroundColor: "#550C55" }}>
+            <Nav className="justify-content-end flex-grow-1 pe-3">
+              <Nav.Link href="#home" style={{ textAlign: "center",color:"white" }}>Inicio</Nav.Link>
+              <Nav.Link href="#link" style={{ textAlign: "center",color:"white"  }}>Para você</Nav.Link>
+              <Nav.Link href="#home" style={{ textAlign: "center",color:"white"  }}>Para seu negócio</Nav.Link>
+              <Nav.Link href="#link" style={{ textAlign: "center",color:"white"  }}>A Vexo</Nav.Link>
+              <Nav.Link href="#home" style={{ textAlign: "center",color:"white"  }}>Duvidas</Nav.Link>
+              <Nav.Link href="#link" style={{ textAlign: "center",color:"white"  }}>Blog</Nav.Link>
+            </Nav>
+          </Offcanvas.Body>
+        </Navbar.Offcanvas>
+      </Container>
+    </Navbar>
   );
 }
+
+export default OffcanvasExample;
