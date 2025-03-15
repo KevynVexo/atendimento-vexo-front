@@ -8,13 +8,14 @@ class UserService {
 
       // Aqui, você pode tratar a resposta, como armazenar tokens ou redirecionar, etc.
       if (response.ok) {
-        alert("login feito com sucesso");
+        return {data:response.data,ok:response.ok};
       } else {
         console.error("Falha no login", response.data);
+        return {msg:"Erro: "+response.data,ok:response.ok};
       }
     } catch (error) {
       console.error("Erro no processo de login", error);
-      throw error;
+      return {msg:"Erro: "+error,ok:false};
     }
   }
 }

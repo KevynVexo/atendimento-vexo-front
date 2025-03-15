@@ -5,15 +5,26 @@ import Footer from "../components/footer/Footer";
 import "../styles/login.css";
 import "../styles/global.css";
 import UserService from "../components/services/user.service";
+import BasicModal from "../components/modal/modal.message";
 
 const Login = () => {
-  // Estados para armazenar email e senha
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalMessage, setModalMessage] = useState("");
 
-  // Função de login
+  const handleOpenModal = (title: string, message: string) => {
+    setModalTitle(title);
+    setModalMessage(message);
+    setOpenModal(true);
+  };
+
   async function authenticatorLogin() {
-    await UserService.login(email,password);
+    const res = await UserService.login(email, password);
+    if (!res.ok) {
+      handleOpenModal("Erro no Login", "Usuário ou senha inválidos. Tente novamente.");
+    }
   }
 
   return (
@@ -22,10 +33,9 @@ const Login = () => {
       <main className="flex-grow flex items-center justify-center">
         <div className="flex flex-wrap justify-between items-center max-w-4xl w-full p-8">
           <div className="flex-estrutura-divisao">
-            {/* Formulário de Login */}
             <div>
               <div className="bg-white p-8 rounded-lg shadow-md w-96 flex-form-login">
-                <form 
+                <form
                   onSubmit={(e) => {
                     e.preventDefault();
                     authenticatorLogin();
@@ -39,7 +49,7 @@ const Login = () => {
                       type="email"
                       className="campo-formulario campo-login-senha"
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)} // Atualiza o estado
+                      onChange={(e) => setEmail(e.target.value)}
                       required
                     />
                   </div>
@@ -51,7 +61,7 @@ const Login = () => {
                       type="password"
                       className="campo-formulario campo-login-senha"
                       value={password}
-                      onChange={(e) => setPassword(e.target.value)} // Atualiza o estado
+                      onChange={(e) => setPassword(e.target.value)}
                       required
                     />
                   </div>
@@ -62,10 +72,7 @@ const Login = () => {
                     >
                       Esqueci minha senha
                     </a>
-                    <button
-                      type="submit"
-                      className="botaoLogin"
-                    >
+                    <button type="submit" className="botaoLogin">
                       Login
                     </button>
                   </div>
@@ -82,18 +89,16 @@ const Login = () => {
                 </div>
               </div>
             </div>
-            {/* Ilustração */}
             <div className="hidden md:block">
-              <img
-                src="images/image-door.webp"
-                alt="Ilustração"
-                className="max-w-xs"
-              />
+              <img src="images/image-door.webp" alt="Ilustração" className="max-w-xs" />
             </div>
           </div>
         </div>
       </main>
       <Footer />
+      
+      {/* Modal Importado */}
+      <BasicModal open={openModal} onClose={() => setOpenModal(false)} title={modalTitle} message={modalMessage} />
     </div>
   );
 };
